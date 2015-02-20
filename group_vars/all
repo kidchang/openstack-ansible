@@ -7,27 +7,27 @@ OPENSTACK_REPO: cloudarchive-juno.list
 ADMIN_TOKEN: admin
 CEILOMETER_TOKEN: c095d479023a0fd58a54
 RABBIT_PASS: guest
-KEYSTONE_DBPASS: keystone_db_123456
-DEMO_PASS: demo_123456
-ADMIN_PASS: admin_123456
-GLANCE_DBPASS: glance_db_123456
-GLANCE_PASS: glance_123456
-NOVA_DBPASS: nova_db_123456
-NOVA_PASS: nova_123456
-DASH_DBPASS: dash_db_123456
-CINDER_DBPASS: cinder_db_123456
-CINDER_PASS: cinder_123456
-NEUTRON_DBPASS: neutron_db_123456
-NEUTRON_PASS: netron_123456
-HEAT_DBPASS: heat_db_123456
-HEAT_PASS: heat_123456
-CEILOMETER_DBPASS: ceilometer_db_123456
-CEILOMETER_PASS: ceilometer_123456
-TROVE_DBPASS: trove_db_123456
-TROVE_PASS: trove_123456
+KEYSTONE_DBPASS: keystone_db_secret
+DEMO_PASS: demo_secret
+ADMIN_PASS: admin_secret
+GLANCE_DBPASS: glance_db_secret
+GLANCE_PASS: glance_secret
+NOVA_DBPASS: nova_db_secret
+NOVA_PASS: nova_secret
+DASH_DBPASS: dash_db_secret
+CINDER_DBPASS: cinder_db_secret
+CINDER_PASS: cinder_secret
+NEUTRON_DBPASS: neutron_db_secret
+NEUTRON_PASS: netron_secret
+HEAT_DBPASS: heat_db_secret
+HEAT_PASS: heat_secret
+CEILOMETER_DBPASS: ceilometer_db_secret
+CEILOMETER_PASS: ceilometer_secret
+TROVE_DBPASS: trove_db_secret
+TROVE_PASS: trove_secret
 
 
-METADATA_SECRET: metadata_123456
+METADATA_SECRET: metadata_secret
 INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS: 10.1.1.21
 INTERFACE_NAME: eth2
 
