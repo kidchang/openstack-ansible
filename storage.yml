@@ -4,4 +4,4 @@
   sudo: True
   roles:
     - common
-    - cinder
+    - cinder-volume

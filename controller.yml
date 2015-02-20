@@ -4,11 +4,12 @@
   sudo: True
   roles:
       - common
+      - database
+      - mq
+      - glance
       - keystone
       - nova-controller
-      - database
-      - dashboard
       - neutron-common
       - neutron-server
-      - glance
-      - mq
+      - dashboard
+      - cinder-controller

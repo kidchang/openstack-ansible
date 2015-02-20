@@ -1,0 +1,40 @@
+---
+- name: Install mysql client and server packages
+  apt: name={{ item }} state=present
+  with_items:
+    - python-mysqldb
+    - mysql-server
+
+- name: install oslo packages
+  pip: name=oslo.{{ item }} state=latest
+  with_items:
+    - rootwrap
+    - messaging
+
+- name: install openstack nova-client
+  pip: name=python-novaclient
+       state=latest
+
+- name: install nova related pacakges
+  apt: name={{ item }} state=present
+  with_items:
+    - nova-api
+    - nova-cert
+    - nova-conductor
+    - nova-consoleauth
+    - nova-novncproxy
+    - nova-scheduler
+
+- name: update nova conf
+  template: src=nova.conf
+            dest=/etc/nova/nova.conf
+            backup=yes
+  notify:
+    - restart nova-api
+    - restart nova-cert
+    - restart nova-consoleauth
+    - restart nova-scheduler
+    - restart nova-conductor
+    - restart nova-novncproxy
+    - remove nova-sqlite-db
+    - sync nova-manage-db
