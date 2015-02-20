@@ -1,0 +1,43 @@
+controller_host: 10.1.0.11
+network_host: 10.1.0.12
+compute_host: 10.1.0.13
+storage_host: 10.1.0.14
+
+OPENSTACK_REPO: cloudarchive-juno.list
+ADMIN_TOKEN: admin
+CEILOMETER_TOKEN: c095d479023a0fd58a54
+RABBIT_PASS: guest
+KEYSTONE_DBPASS: keystone_db_123456
+DEMO_PASS: demo_123456
+ADMIN_PASS: admin_123456
+GLANCE_DBPASS: glance_db_123456
+GLANCE_PASS: glance_123456
+NOVA_DBPASS: nova_db_123456
+NOVA_PASS: nova_123456
+DASH_DBPASS: dash_db_123456
+CINDER_DBPASS: cinder_db_123456
+CINDER_PASS: cinder_123456
+NEUTRON_DBPASS: neutron_db_123456
+NEUTRON_PASS: netron_123456
+HEAT_DBPASS: heat_db_123456
+HEAT_PASS: heat_123456
+CEILOMETER_DBPASS: ceilometer_db_123456
+CEILOMETER_PASS: ceilometer_123456
+TROVE_DBPASS: trove_db_123456
+TROVE_PASS: trove_123456
+
+
+METADATA_SECRET: metadata_123456
+INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS: 10.1.1.21
+INTERFACE_NAME: eth2
+
+EXTERNAL_NETWORK_CIDR: 203.0.113.0/24
+EXTERNAL_NETWORK_GATEWAY: 203.0.113.1
+FLOATING_IP_START: 203.0.113.101
+FLOATING_IP_END: 203.0.113.200
+
+build_in_image: http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img
+build_in_image_name: cirros-0.3.2-x86_64-disk.img
+
+physical_device: /dev/sdb
+

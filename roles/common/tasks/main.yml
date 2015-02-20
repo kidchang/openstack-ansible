@@ -1,0 +1,29 @@
+---
+- name: update apt source list
+  copy: src=sources.list.d/{{ OPENSTACK_REPO }}
+        dest=/etc/apt/sources.list.d/
+
+- name: update packages once
+  apt: update_cache=yes 
+
+- name: update hosts files to all hosts
+  template: src=hosts
+            dest=/etc/hosts
+            backup=yes
+
+- name: install common packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - python-pip
+    - python-dev
+    - python-mysqldb
+    - ntp
+
+- name: update ntp conf
+  copy: src=ntp.conf dest=/etc/ntp.conf backup=yes
+
+- name: update pip
+  pip: name={{ item }} state=latest
+  with_items:
+    - pip
+

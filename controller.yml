@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: True
+  roles:
+      - common
+      - keystone
+      - nova-controller
+      - database
+      - dashboard
+      - neutron-common
+      - neutron-server
+      - glance
+      - mq
