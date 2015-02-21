@@ -2,6 +2,7 @@ controller_host: 10.1.0.11
 network_host: 10.1.0.12
 compute_host: 10.1.0.13
 storage_host: 10.1.0.14
+DB_HOST: controller
 
 OPENSTACK_REPO: cloudarchive-juno.list
 ADMIN_TOKEN: admin

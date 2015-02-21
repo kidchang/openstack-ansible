@@ -1,10 +1,4 @@
 ---
-- name: Install mysql client and server packages
-  apt: name={{ item }} state=present
-  with_items:
-    - python-mysqldb
-    - mysql-server
-
 - name: install oslo packages
   pip: name=oslo.{{ item }} state=latest
   with_items:
