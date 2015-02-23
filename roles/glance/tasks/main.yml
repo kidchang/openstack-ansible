@@ -1,0 +1,39 @@
+---
+- name: install glance packages
+  apt: name={{ item }}
+  with_items:
+    - glance
+    - python-glanceclient
+
+- name: update glance conf
+  template: src={{ item }} dest=/etc/glance/{{ item }} backup=yes
+  with_items:
+    - glance-api.conf
+    - glance-registry.conf
+  notify:
+    - restart glance-registry
+    - restart glance-api
+
+- name: manually stop glance-api
+  service: name=glance-api state=stopped
+
+- name: manually stop glance-registry
+  service: name=glance-registry state=stopped
+
+- name: remove default sqlite db
+  shell: rm /var/lib/glance/glance.sqlite || touch glance.sqllite.db.removed
+
+- name: sync glance db
+  shell: su -s /bin/sh -c "glance-manage db_sync" glance
+
+- name: start glance api
+  service: name=glance-api state=started
+
+- name: start glance registry
+  service: name=glance-registry state=started
+
+- name: place upload_image.sh under /opt/
+  template: src=upload_image.sh dest=/opt/upload_image.sh mode=0744
+
+- name: run upload_image.sh
+  shell: /opt/upload_image.sh && touch upload_image_complete || uplaod_image_failed 

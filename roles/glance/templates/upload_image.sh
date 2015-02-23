@@ -1,0 +1,1 @@
+glance --os-username=admin --os-password={{ ADMIN_PASS }} --os-tenant-name=admin --os-auth-url=http://controller:35357/v2.0 image-create --name="{{ build_in_image_name }}" --disk-format=qcow2 --container-format=bare --is-public=true --copy-from {{ build_in_image }} && touch glance.import.completed
