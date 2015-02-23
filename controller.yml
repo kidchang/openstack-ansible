@@ -9,7 +9,6 @@
       - glance
       - keystone
       - nova-controller
-      - neutron-common
-      - neutron-server
+      - neutron-controller
       - dashboard
       - cinder-controller

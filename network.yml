@@ -4,6 +4,4 @@
   sudo: True
   roles:
     - common
-    - neutron-common
-    - neutron-ovs
-    - neutron-agents 
+    - neutron-network
