@@ -1,7 +1,7 @@
-controller_host: 10.1.0.11
-network_host: 10.1.0.12
-compute_host: 10.1.0.13
-storage_host: 10.1.0.14
+controller_host: 10.1.0.110
+network_host: 10.1.0.110
+compute_host: 10.1.0.110
+storage_host: 10.1.0.110
 DB_HOST: controller
 
 MQ_BROKER: rabbitmq

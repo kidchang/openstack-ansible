@@ -36,7 +36,7 @@
   template: src=metadata_agent.ini dest=/etc/neutron/metadata_agent.ini backup=yes
 
 - name: config ml2 plugin-in
-  temalte: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
+  template: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
 
 - name: restart ovs service
   service: name=openvswitch-switch state=restarted
@@ -51,6 +51,7 @@
   openvswitch_port: bridge=br-ex port={{ INTERFACE_NAME }} state=present
 
 - name: restart services
+  shell: echo restart services
   notify:
     - restart neutron-plugin-openvswitch-agent
     - restart neutron-l3-agent

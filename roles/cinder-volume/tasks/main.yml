@@ -1,0 +1,15 @@
+---
+- name: install cinder-volume and lvm2 packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - cinder-volume
+    - lvm2
+
+- name: create phsyical and group volumes
+  lvg: vg=cinder-volumes pvs={{ physical_device }} vg_options=--force
+
+- name: upload cinder-volume configuration
+  template: src=cinder.conf dest=/etc/cinder/cinder.conf backup=yes
+  notify:
+    - restart cinder-volume
+    - restart tgt 
