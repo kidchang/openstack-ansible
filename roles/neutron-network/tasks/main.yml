@@ -1,0 +1,58 @@
+---
+- name: activate ipv4 forwarding
+  sysctl: name=net.ipv4.ip_forward value=1 state=present reload=yes
+
+- name: deactivate ipv4 rp filter
+  sysctl: name=net.ipv4.conf.all.rp_filter value=0 state=present reload=yes
+
+- name: deactivate ipv4 default rp filter
+  sysctl: name=net.ipv4.conf.default.rp_filter value=0 state=present reload=yes
+
+- name: install neutron network related packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - neutron-plugin-ml2
+    - neutron-plugin-openvswitch-agent
+    - openvswitch-datapath-dkms
+    - neutron-l3-agent
+    - neutron-dhcp-agent
+
+- name: config neutron.conf
+  template: src=neutron.conf dest=/etc/neutron/neutron.conf backup=yes
+
+- name: config l3 agent
+  template: src=l3_agent.ini dest=/etc/neutron/l3_agent.ini backup=yes
+
+- name: config dhcp agent
+  template: src=dhcp_agent.ini dest=/etc/neutron/dhcp_agent.ini backup=yes
+
+- name: update dnsmasq-neutron.conf
+  template: src=dnsmasq-neutron.conf dest=/etc/neutron/dnsmasq-neutron.conf
+
+- name: kill all dnsmasq processes
+  shell: killall dnsmasq || echo error
+
+- name: config metadata agent
+  template: src=metadata_agent.ini dest=/etc/neutron/metadata_agent.ini backup=yes
+
+- name: config ml2 plugin-in
+  temalte: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
+
+- name: restart ovs service
+  service: name=openvswitch-switch state=restarted
+
+- name: add br-int
+  openvswitch_bridge: bridge=br-int state=present
+
+- name: add br-ex
+  openvswitch_bridge: bridge=br-ex state=present 
+
+- name: assign a port to br-ex for physical ext interface
+  openvswitch_port: bridge=br-ex port={{ INTERFACE_NAME }} state=present
+
+- name: restart services
+  notify:
+    - restart neutron-plugin-openvswitch-agent
+    - restart neutron-l3-agent
+    - restart neutron-dhcp-agent
+    - restart neutron-metadata-agent

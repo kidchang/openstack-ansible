@@ -1,0 +1,29 @@
+---
+- name: activate ipv4 forwarding
+  sysctl: name=net.ipv4.ip_forward value=1 state=present reload=yes
+
+- name: deactivate ipv4 rp filter
+  sysctl: name=net.ipv4.conf.all.rp_filter value=0 state=present reload=yes
+
+- name: deactivate ipv4 default rp filter
+  sysctl: name=net.ipv4.conf.default.rp_filter value=0 state=present reload=yes
+
+- name: install compute-related neutron packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - neutron-common
+    - neutron-plugin-ml2
+    - neutron-plugin-openvswitch-agent
+    - openvswitch-datapath-dkms
+
+- name: manually restart ovs switch
+  service: name=openvswitch-switch state=restarted
+
+- name: add br-int
+  openvswitch_bridge: bridge=br-int state=present
+
+- name: restart nova-compute
+  service: name=nova-compute state=restarted
+
+- name: restart neutron-plugin-openvswitch-agent
+  service: name=neutron-plugin-openvswitch-agent state=restarted
