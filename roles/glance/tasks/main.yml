@@ -1,6 +1,6 @@
 ---
 - name: install glance packages
-  apt: name={{ item }}
+  apt: name={{ item }} state=latest force=yes
   with_items:
     - glance
     - python-glanceclient
@@ -32,8 +32,6 @@
 - name: start glance registry
   service: name=glance-registry state=started
 
-- name: place upload_image.sh under /opt/
-  template: src=upload_image.sh dest=/opt/upload_image.sh mode=0744
+- name: upload cirros img to glance
+  shell: glance --os-username=admin --os-password={{ ADMIN_PASS }} --os-tenant-name=admin --os-auth-url=http://controller:35357/v2.0 image-create --name="{{ build_in_image_name }}" --disk-format=qcow2 --container-format=bare --is-public=true --copy-from {{ build_in_image }} && touch glance.import.completed
 
-- name: run upload_image.sh
-  shell: /opt/upload_image.sh && touch upload_image_complete || uplaod_image_failed 

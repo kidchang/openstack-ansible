@@ -1,6 +1,6 @@
 ---
 - name: install controller-related neutron packages
-  apt: name={{ item }} state=present
+  apt: name={{ item }} state=present force=yes
   with_items:
     - neutron-server
     - neutron-plugin-ml2

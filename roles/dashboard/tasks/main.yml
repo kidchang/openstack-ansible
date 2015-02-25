@@ -1,6 +1,6 @@
 ---
 - name: install dashboard packages
-  apt: name={{ item }}
+  apt: name={{ item }} force=yes
   with_items:
     - apache2
     - memcached

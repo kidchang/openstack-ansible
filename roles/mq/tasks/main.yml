@@ -1,3 +1,2 @@
 ---
 - include: rabbitmq.yml
-  when: "{{ MQ_BROKER }} == rabbitmq"

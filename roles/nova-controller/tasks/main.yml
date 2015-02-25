@@ -1,16 +1,6 @@
 ---
-- name: install oslo packages
-  pip: name=oslo.{{ item }} state=latest
-  with_items:
-    - rootwrap
-    - messaging
-
-- name: install openstack nova-client
-  pip: name=python-novaclient
-       state=latest
-
-- name: install nova related pacakges
-  apt: name={{ item }} state=present
+- name: install nova related packages
+  apt: name={{ item }} state=present force=yes
   with_items:
     - nova-api
     - nova-cert
@@ -18,6 +8,8 @@
     - nova-consoleauth
     - nova-novncproxy
     - nova-scheduler
+    - python-novaclient
+    - python-oslo.rootwrap
 
 - name: update nova conf
   template: src=nova.conf

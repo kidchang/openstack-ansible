@@ -84,7 +84,7 @@
 - name: create nova remote user
   mysql_user: host=%
               name=nova
-              passsowrd={{ NOVA_DBPASS }}
+              password={{ NOVA_DBPASS }}
               priv=nova.*:ALL
               state=present
 

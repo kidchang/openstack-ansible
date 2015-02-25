@@ -2,7 +2,7 @@
 {{ controller_host }} controller
 # network
 {{ network_host }} network
-# compute1
+# compute
 {{ compute_host }} compute
 #block1
 {{ storage_host }} storage

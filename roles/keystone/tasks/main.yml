@@ -1,6 +1,6 @@
 ---
 - name: install keystone packages
-  apt: name=keystone state=present
+  apt: name=keystone state=present force=yes
 
 - name: update keystone conf
   template: src=keystone.conf dest=/etc/keystone/keystone.conf backup=yes
@@ -16,19 +16,19 @@
   shell: su -s /bin/sh -c "keystone-manage db_sync"
 
 - name: cron job to purge expired tokens hourly
-  shell: crontab -l -u keystone 2>&1 | grep -q token_flush) || echo '@hourly /usr/bin/keystone-manage token_flush > /var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone
+  shell: (crontab -l -u keystone 2>&1 | grep -q token_flush) || echo '@hourly /usr/bin/keystone-manage token_flush > /var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone
 
 - name: manually start keystone
   service: name=keystone state=started
 
 - name: place keystone init script under /opt/
-  template: src=keystone_init dest=/opt/keystone_init mode=744
+  template: src=keystone_init dest=/opt/keystone_init mode=0744
 
 - name: run keystone_init
   shell: /opt/keystone_init && touch init_complete || init_failed
 
 - name: keystone source files
-  template: src= {{ item }} dest=~/{{ item }}
+  template: src={{ item }} dest=~/{{ item }}
   with_items:
     - admin-openrc.sh
     - demo-openrc.sh

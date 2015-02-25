@@ -1,6 +1,6 @@
 ---
 - name: install cinder-volume and lvm2 packages
-  apt: name={{ item }} state=installed
+  apt: name={{ item }} state=installed force=yes
   with_items:
     - cinder-volume
     - lvm2

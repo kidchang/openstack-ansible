@@ -1,0 +1,17 @@
+---
+- hosts: allinone
+  sudo: True
+  roles: 
+    - { role: common }
+    - { role: database }
+    - { role: mq }
+    - { role: keystone }
+    - { role: glance }
+    - { role: nova-controller }
+    - { role: neutron-controller }
+    - { role: cinder-controller }
+    - { role: dashboard }
+    - { role: nova-compute }
+    - { role: neutron-compute }
+    - { role: neutron-network }
+    - { role: cinder-volume } 

@@ -1,6 +1,6 @@
 ---
 - name: install cinder packages
-  apt: name={{ item }}
+  apt: name={{ item }} state=present force=yes
   with_items:
     - cinder-api
     - cinder-scheduler
