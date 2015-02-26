@@ -32,6 +32,13 @@
 - name: start glance registry
   service: name=glance-registry state=started
 
-- name: upload cirros img to glance
-  shell: glance --os-username=admin --os-password={{ ADMIN_PASS }} --os-tenant-name=admin --os-auth-url=http://controller:35357/v2.0 image-create --name="{{ build_in_image_name }}" --disk-format=qcow2 --container-format=bare --is-public=true --copy-from {{ build_in_image }} && touch glance.import.completed
+- name: place image upload script
+  template: src=image_upload.sh dest=/opt/image_upload.sh mode=0744
 
+- name: wait for 9292 port to become available
+  wait_for: port=9292 delay=5
+
+- name: run image upload
+  shell: /opt/image_upload.sh && touch image_upload_completed
+  args:
+    creates: image_upload_completed

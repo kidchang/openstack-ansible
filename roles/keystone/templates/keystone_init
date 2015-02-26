@@ -2,6 +2,7 @@
 
 keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 user-create --name=admin --pass={{ ADMIN_PASS }} --email=admin@admin.com
 keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 role-create --name=admin
+keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 user-create --name=admin --pass={{ ADMIN_PASS }} --email=admin@admin.com
 keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 tenant-create --name=admin --description="Admin Tenant"
 keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 user-role-add --user=admin --tenant=admin --role=admin
 keystone --os-token={{ ADMIN_TOKEN }} --os-endpoint=http://controller:35357/v2.0 user-role-add --user=admin --role=_member_ --tenant=admin

@@ -25,6 +25,7 @@
     - restart nova-conductor
     - restart neutron-server
 
+
 - name: manually restart nova-api
   service: name=nova-api state=restarted
 
@@ -42,3 +43,8 @@
 
 - name: init neutron
   shell: /opt/neutron_init.sh && touch neutron_init_complete || touch neutron_init_failed
+  args:
+    creates: neutron_init_complete
+
+- name: neutron-db-manage upgrade to Juno
+  shell: neutron-db-manage --config-file=/etc/neutron/neutron.conf upgrade head

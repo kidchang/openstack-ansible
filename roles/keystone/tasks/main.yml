@@ -25,7 +25,9 @@
   template: src=keystone_init dest=/opt/keystone_init mode=0744
 
 - name: run keystone_init
-  shell: /opt/keystone_init && touch init_complete || init_failed
+  shell: /opt/keystone_init && touch keystone_init_complete || keystone_init_failed
+  args:
+    creates: keystone_init_complete 
 
 - name: keystone source files
   template: src={{ item }} dest=~/{{ item }}

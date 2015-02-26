@@ -1,11 +1,11 @@
 ---
 - name: install dashboard packages
-  apt: name={{ item }} force=yes
+  apt: name={{ item }} state=present force=yes
   with_items:
     - apache2
     - memcached
     - libapache2-mod-wsgi
-    - openstack dashboard
+    - openstack-dashboard
 
 - name: remove ubuntu theme
   apt: name=openstack-dashboard-ubuntu-theme
@@ -18,10 +18,10 @@
 
 - name: update horizon settings
   template: src=local_settings.py dest=/etc/openstack-dashboard/local_settings.py
-            bakcup=yes
+            backup=yes
 
 - name: restart apache2
   service: name=apache2 state=restarted
 
 - name: restart memcached
-  service: name=memecached state=restarted
+  service: name=memcached state=restarted

@@ -19,8 +19,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     test.vm.provider "virtualbox" do |vbox|
-      vbox.memory = 1024
+      vbox.memory = 4096
+      vbox.customize ["createhd",
+                        '--filename', "tmp/disk",
+                        '--size', "2000" ]
+      vbox.customize ['storageattach', :id,
+                       '--storagectl', 'SATAController',
+                       '--port', 1,
+                       '--device', 0,
+                       '--type', 'hdd',
+                       '--medium', "tmp/disk.vdi"]
     end
-
   end
 end

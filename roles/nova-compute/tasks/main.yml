@@ -1,6 +1,6 @@
 ---
 - name: install nova-compute related packages
-  apt: name= nova-compute-kvm state=installed force=yes
+  apt: name=nova-compute-kvm state=installed force=yes
 
 - name: update nova-compute conf
   template: src={{ item }} dest=/etc/nova/{{ item }}

@@ -25,3 +25,5 @@
 
 - name: run cinder register script
   shell: /opt/cinder_init.sh && touch cinder_init_complete
+  args:
+    creates: cinder_init_complete

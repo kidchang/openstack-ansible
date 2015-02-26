@@ -9,7 +9,7 @@
   sysctl: name=net.ipv4.conf.default.rp_filter value=0 state=present reload=yes
 
 - name: install compute-related neutron packages
-  apt: name={{ item }} state=installed force-yes
+  apt: name={{ item }} state=present force=yes
   with_items:
     - neutron-common
     - neutron-plugin-ml2
