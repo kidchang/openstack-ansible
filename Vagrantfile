@@ -10,16 +10,53 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.define "test" do |test|
-    test.vm.box = "ubuntu/trusty64"
+  config.vm.define "controller" do |controller|
+    controller.vm.box = "ubuntu/trusty64"
 
-    test.vm.network "private_network", ip: "10.1.0.110"
-    test.vm.provision "ansible" do |ansible|
-      ansible.playbook = "test.yml"
+    controller.vm.network "private_network", ip: "10.1.0.11"
+    controller.vm.provision "ansible" do |ansible|
+      ansible.playbook = "controller.yml"
     end
 
-    test.vm.provider "virtualbox" do |vbox|
+    controller.vm.provider "virtualbox" do |vbox|
+      vbox.memory = 2048
+    end
+
+  end
+
+  config.vm.define "network" do |network|
+    network.vm.box = "ubuntu/trusty64"
+    network.vm.network "private_network", ip: "10.1.0.12"
+    network.vm.provision "ansible" do |ansible|
+      ansible.playbook = "network.yml"
+    end
+
+    network.vm.provider "virtualbox" do |vbox|
+      vbox.memory = 1024
+    end
+
+  end
+
+  config.vm.define "compute" do |compute|
+    compute.vm.box = "ubuntu/trusty64"
+    compute.vm.network "private_network", ip: "10.1.0.13"
+    compute.vm.provision "ansible" do |ansible|
+      ansible.playbook = "compute.yml"
+    end
+
+    compute.vm.provider "virtualbox" do |vbox|
       vbox.memory = 4096
+    end
+
+  end
+
+  config.vm.define "storage" do |storage|
+    storage.vm.box = "ubuntu/trusty64"
+    storage.vm.network "private_network", ip: "10.1.0.14"
+    storage.vm.provision "ansible" do |ansible|
+      ansible.playbook = "storage.yml"
+    end
+    storage.vm.provider "virtualbox" do |vbox|
       vbox.customize ["createhd",
                         '--filename', "tmp/disk",
                         '--size', "2000" ]
@@ -31,4 +68,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                        '--medium', "tmp/disk.vdi"]
     end
   end
+
 end
+

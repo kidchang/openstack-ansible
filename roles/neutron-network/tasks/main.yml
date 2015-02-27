@@ -9,7 +9,7 @@
   sysctl: name=net.ipv4.conf.default.rp_filter value=0 state=present reload=yes
 
 - name: install neutron network related packages
-  apt: name={{ item }} state=installed force=yes
+  apt: name={{ item }} state=present force=yes
   with_items:
     - neutron-plugin-ml2
     - neutron-plugin-openvswitch-agent
@@ -18,7 +18,7 @@
     - neutron-dhcp-agent
 
 - name: config neutron.conf
-  template: src=neutron.conf dest=/etc/neutron/neutron.conf backup=yes
+  template: src=neutron.conf.network dest=/etc/neutron/neutron.conf backup=yes
 
 - name: config l3 agent
   template: src=l3_agent.ini dest=/etc/neutron/l3_agent.ini backup=yes

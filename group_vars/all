@@ -1,7 +1,7 @@
-controller_host: 10.1.0.110
-network_host: 10.1.0.110
-compute_host: 10.1.0.110
-storage_host: 10.1.0.110
+controller_host: 10.1.0.11
+network_host: 10.1.0.12
+compute_host: 10.1.0.13
+storage_host: 10.1.0.14
 DB_HOST: controller
 
 MQ_BROKER: rabbitmq
@@ -26,7 +26,7 @@ NEUTRON_PASS: netron_secret
 
 METADATA_SECRET: metadata_secret
 INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS: 10.1.1.21
-INTERFACE_NAME: eth2
+INTERFACE_NAME: eth1
 
 EXTERNAL_NETWORK_CIDR: 203.0.113.0/24
 EXTERNAL_NETWORK_GATEWAY: 203.0.113.1

@@ -6,9 +6,9 @@
       - common
       - database
       - mq
-      - glance
       - keystone
       - nova-controller
       - neutron-controller
       - dashboard
       - cinder-controller
+      - glance
