@@ -23,4 +23,13 @@
     - restart nova-conductor
     - restart nova-novncproxy
     - remove nova-sqlite-db
-    - sync nova-manage-db
+
+- name: nova db sync
+  command: su -s /bin/sh -c "nova-manage db sync" nova
+  notify:
+    - restart nova-api
+    - restart nova-cert
+    - restart nova-consoleauth
+    - restart nova-scheduler
+    - restart nova-conductor
+    - restart nova-novncproxy

@@ -20,8 +20,5 @@
 - name: remove nova-sqlite-db
   shell: rm /var/lib/nova/nova.sqlite || touch nova.sqlite.db.removed
 
-- name: sync nova-manage-db
-  shell: su -s /bin/sh -c "nova-manage db sync" nova
-
 - name: restart neutron-server
   service: name=neutron-server state=restarted
