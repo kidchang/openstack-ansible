@@ -11,10 +11,12 @@
   apt: name=openstack-dashboard-ubuntu-theme
        state=absent
 
-- name: update dashboard conf
-  template: src=openstack-dashboard.conf
-            dest=/etc/apache2/sites-available/openstack-dashboard.conf
-            backup=yes
+## horizon configuration is already enabled in apache2/conf-enabled
+## by openstack-dashboard package deploy script.
+#- name: update dashboard conf
+#  template: src=openstack-dashboard.conf
+#            dest=/etc/apache2/sites-available/openstack-dashboard.conf
+#            backup=yes
 
 - name: update horizon settings
   template: src=local_settings.py dest=/etc/openstack-dashboard/local_settings.py

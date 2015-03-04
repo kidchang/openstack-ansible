@@ -24,15 +24,11 @@ For debugging, when VMs are running, do vagrant ssh { node_name} (e.g: vagrant s
 
 To rerun, when VMs are running, do vagrant provision { node_name} (e.g: vagrant provision controller)
 
-### Few things to note:
+### Usage:
 
-* When ansible finishes provisioning, do: `vagrant ssh controller` and go to `/user/share/openstack-dashboard` and run `python manage.py runserver 0.0.0.0:8000`
+* Once deployment is up and running, you can visit the dashboard by visit http://{{ controller ip }}/horizon in the browser.
 
-* Open a browser and type in `http://controller:8000`, enter username and password. It will go to `http://controller:8000/horizon`, this page does not exist, removing "horizon" in the address will solve this issue.
-
-* If you don't see "nova" in "availability zone", do `ansible ssh controller` and `sudo service nova-conductor start` to manually bring it up.
-
-* There's still an issue with bringing up instances. It consistently complains that "no valid host was found". They maybe ralated to neutron.
+* You can also "vagrant ssh controller" and "source /opt/admin-openrc.sh"; then you are able to run openstack command lines.
 
 ### References:
 * https://github.com/openstack-ansible/openstack-ansible
