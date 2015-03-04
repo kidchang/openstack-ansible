@@ -35,6 +35,9 @@
 - name: place image upload script
   template: src=image_upload.sh dest=/opt/image_upload.sh mode=0744
 
+- name: download cirros image file
+  get_url: url={{ build_in_image }} dest=/opt/{{ build_in_image_name }}
+
 - name: wait for 9292 port to become available
   wait_for: port=9292 delay=5
 
