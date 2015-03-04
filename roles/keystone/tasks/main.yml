@@ -30,7 +30,7 @@
     creates: keystone_init_complete 
 
 - name: keystone source files
-  template: src={{ item }} dest=~/{{ item }}
+  template: src={{ item }} dest=/opt/{{ item }}
   with_items:
     - admin-openrc.sh
     - demo-openrc.sh
