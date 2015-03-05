@@ -16,6 +16,9 @@
     - neutron-plugin-openvswitch-agent
     - openvswitch-datapath-dkms
 
+- name: config ml2 plugin
+  template: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
+
 - name: manually restart ovs switch
   service: name=openvswitch-switch state=restarted
 

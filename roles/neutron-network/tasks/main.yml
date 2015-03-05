@@ -17,8 +17,8 @@
     - neutron-l3-agent
     - neutron-dhcp-agent
 
-- name: config neutron.conf
-  template: src=neutron.conf.network dest=/etc/neutron/neutron.conf backup=yes
+- name: config neutron
+  template: src=neutron-network.conf dest=/etc/neutron/neutron.conf backup=yes
 
 - name: config l3 agent
   template: src=l3_agent.ini dest=/etc/neutron/l3_agent.ini backup=yes
@@ -35,7 +35,7 @@
 - name: config metadata agent
   template: src=metadata_agent.ini dest=/etc/neutron/metadata_agent.ini backup=yes
 
-- name: config ml2 plugin-in
+- name: config ml2 plugin
   template: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
 
 - name: restart ovs service
