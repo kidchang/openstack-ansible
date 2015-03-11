@@ -70,6 +70,23 @@
               priv=neutron.*:ALL
               state=present
 
+- name: create ovs_neutron database
+  mysql_db: name=ovs_neutron
+            state=present
+
+- name: grant access to ovs_neutron
+  mysql_user: name=neutron
+              password={{ NEUTRON_DBPASS }}
+              priv=ovs_neutron.*:ALL
+              state=present
+
+- name: grant remote access to ovs_neutron
+  mysql_user: host=%
+              name=neutron
+              password={{ NEUTRON_DBPASS }}
+              priv=ovs_neutron.*:ALL
+              state=present
+
 # nova
 - name: create nova database
   mysql_db: name=nova

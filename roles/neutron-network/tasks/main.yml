@@ -50,6 +50,19 @@
 - name: assign a port to br-ex for physical ext interface
   openvswitch_port: bridge=br-ex port={{ INTERFACE_NAME }} state=present
 
+- include: igmp-router.yml
+  when: "'vxlan' in {{ NEUTRON_TUNNEL_TYPES }}"
+
+- name: assert kernel support for vxlan
+  command: modinfo -F version vxlan
+  when: "'vxlan' in {{ NEUTRON_TUNNEL_TYPES }}"
+
+- name: assert iproute2 suppport for vxlan
+  command: ip link add type vxlan help
+  register: iproute_out
+  failed_when: iproute_out.rc == 255
+  when: "'vxlan' in {{ NEUTRON_TUNNEL_TYPES }}"
+
 - name: restart services
   shell: echo restart services
   notify:
