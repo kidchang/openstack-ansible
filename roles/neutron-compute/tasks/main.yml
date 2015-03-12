@@ -1,4 +1,5 @@
 ---
+
 - name: activate ipv4 forwarding
   sysctl: name=net.ipv4.ip_forward value=1 state=present reload=yes
 
@@ -16,8 +17,15 @@
     - neutron-plugin-openvswitch-agent
     - openvswitch-datapath-dkms
 
+- name: config neutron
+  template: src=neutron-network.conf dest=/etc/neutron/neutron.conf backup=yes
+  notify:
+    - restart neutron-plugin-openvswitch-agent
+
 - name: config ml2 plugin
   template: src=ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini backup=yes
+  notify:
+    - restart neutron-plugin-openvswitch-agent 
 
 - name: manually restart ovs switch
   service: name=openvswitch-switch state=restarted
@@ -28,5 +36,3 @@
 - name: restart nova-compute
   service: name=nova-compute state=restarted
 
-- name: restart neutron-plugin-openvswitch-agent
-  service: name=neutron-plugin-openvswitch-agent state=restarted
