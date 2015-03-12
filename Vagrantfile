@@ -27,8 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "network" do |network|
     network.vm.box = "ubuntu/trusty64"
     network.vm.hostname = "network"
-    network.vm.network "private_network", ip: "10.1.0.12"
-    network.vm.network "public_network", ip: "10.3.0.12"
+    network.vm.network "private_network", ip: "10.1.0.12", bridge: "eth0"
+    network.vm.network "public_network", ip: "10.3.0.12", bridge: "installation"
     network.vm.provision "ansible" do |ansible|
       ansible.playbook = "network.yml"
     end
@@ -42,8 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "compute" do |compute|
     compute.vm.box = "ubuntu/trusty64"
     compute.vm.hostname = "compute"
-    compute.vm.network "private_network", ip: "10.1.0.13"
-    compute.vm.network "public_network", ip: "10.3.0.13"
+    compute.vm.network "private_network", ip: "10.1.0.13", bridge: "eth0"
+    compute.vm.network "public_network", ip: "10.3.0.13", bridge: "installation"
     compute.vm.provision "ansible" do |ansible|
       ansible.playbook = "compute.yml"
     end
