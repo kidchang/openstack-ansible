@@ -43,7 +43,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     compute.vm.box = "ubuntu/trusty64"
     compute.vm.hostname = "compute"
     compute.vm.network "private_network", ip: "10.1.0.13"
-    compute.vm.network "public_network", ip: "10.3.0.13"
     compute.vm.provision "ansible" do |ansible|
       ansible.playbook = "compute.yml"
     end
