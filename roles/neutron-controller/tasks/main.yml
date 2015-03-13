@@ -25,17 +25,18 @@
     - restart nova-conductor
     - restart neutron-server
 
-- name: manually restart nova-api
-  service: name=nova-api state=restarted
+- meta: flush_handlers
+#- name: manually restart nova-api
+#  service: name=nova-api state=restarted
 
-- name: manually restart nova-scheduler
-  service: name=nova-scheduler state=restarted
+#- name: manually restart nova-scheduler
+#  service: name=nova-scheduler state=restarted
 
-- name: manually restart nova-conductor
-  service: name=nova-conductor state=restarted
+#- name: manually restart nova-conductor
+#  service: name=nova-conductor state=restarted
 
-- name: manually restart neutron-server
-  service: name=neutron-server state=restarted
+#- name: manually restart neutron-server
+#  service: name=neutron-server state=restarted
 
 - name: place neutron_init.sh under /opt/
   template: src=neutron_init.sh dest=/opt/neutron_init.sh mode=0744
@@ -47,3 +48,5 @@
 
 - name: neutron-db-manage upgrade to Juno
   shell: neutron-db-manage --config-file=/etc/neutron/neutron.conf --config-file=/etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
+  notify:
+    - restart neutron-server

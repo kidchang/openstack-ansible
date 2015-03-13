@@ -1,0 +1,3 @@
+---
+- name: restart ntp
+  command: su -s /bin/sh -c "service ntp stop; ntpd -gq; hwclock --systohc; service ntp start"

@@ -33,3 +33,5 @@
     - restart nova-scheduler
     - restart nova-conductor
     - restart nova-novncproxy
+
+- meta: flush_handlers
