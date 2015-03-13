@@ -6,7 +6,7 @@ odl_controller: 10.1.0.15
 
 DEBUG: False
 VERBOSE: False
-
+NTP_SERVER_LOCAL: controller
 DB_HOST: controller
 MQ_BROKER: rabbitmq
 
