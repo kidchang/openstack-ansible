@@ -27,12 +27,10 @@
   notify:
     - restart neutron-plugin-openvswitch-agent 
 
-- name: manually restart ovs switch
-  service: name=openvswitch-switch state=restarted
-
 - name: add br-int
   openvswitch_bridge: bridge=br-int state=present
+  notify:
+    - restart neutron-plugin-openvswitch-agent
+    - restart nova-compute
 
-- name: restart nova-compute
-  service: name=nova-compute state=restarted
-
+- meta: flush_handlers

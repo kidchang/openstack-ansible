@@ -27,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "network" do |network|
     network.vm.box = "ubuntu/trusty64"
     network.vm.hostname = "network"
-    network.vm.network "private_network", ip: "10.1.0.12"
+    network.vm.network "private_network", ip: "10.1.0.12", bridge: "eth0"
     network.vm.network "public_network", ip: "10.3.0.12"
     network.vm.provision "ansible" do |ansible|
       ansible.playbook = "network.yml"
