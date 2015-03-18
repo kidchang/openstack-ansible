@@ -1,6 +1,7 @@
 ---
 - name: restart neutron-plugin-openvswitch-agent
   service: name=neutron-plugin-openvswitch-agent state=restarted
+  when: "'opendaylight' not in {{ NEUTRON_MECHANISM_DRIVERS }}"
 
 - name: restart neutron-l3-agent
   service: name=neutron-l3-agent state=restarted
