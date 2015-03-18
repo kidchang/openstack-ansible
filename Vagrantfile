@@ -49,29 +49,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     compute.vm.provider "virtualbox" do |vbox|
       vbox.memory = 4096
+      vbox.cpus = 4
     end
 
   end
 
-  config.vm.define "storage" do |storage|
-    storage.vm.box = "ubuntu/trusty64"
-    storage.vm.hostname = "storage"
-    storage.vm.network "private_network", ip: "10.1.0.14"
-    storage.vm.provision "ansible" do |ansible|
-      ansible.playbook = "storage.yml"
-    end
-    storage.vm.provider "virtualbox" do |vbox|
-      vbox.customize ["createhd",
-                        '--filename', "tmp/disk",
-                        '--size', "2000" ]
-      vbox.customize ['storageattach', :id,
-                       '--storagectl', 'SATAController',
-                       '--port', 1,
-                       '--device', 0,
-                       '--type', 'hdd',
-                       '--medium', "tmp/disk.vdi"]
-    end
-  end
+#  config.vm.define "storage" do |storage|
+#    storage.vm.box = "ubuntu/trusty64"
+#    storage.vm.hostname = "storage"
+#    storage.vm.network "private_network", ip: "10.1.0.14"
+#    storage.vm.provision "ansible" do |ansible|
+#      ansible.playbook = "storage.yml"
+#    end
+#    storage.vm.provider "virtualbox" do |vbox|
+#      vbox.customize ["createhd",
+#                        '--filename', "tmp/disk",
+#                        '--size', "2000" ]
+#      vbox.customize ['storageattach', :id,
+#                       '--storagectl', 'SATAController',
+#                       '--port', 1,
+#                       '--device', 0,
+#                       '--type', 'hdd',
+#                       '--medium', "tmp/disk.vdi"]
+#    end
+#  end
 
 end
 

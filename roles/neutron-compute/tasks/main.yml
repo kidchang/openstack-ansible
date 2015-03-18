@@ -14,8 +14,12 @@
   with_items:
     - neutron-common
     - neutron-plugin-ml2
-    - neutron-plugin-openvswitch-agent
     - openvswitch-datapath-dkms
+    - openvswitch-switch
+
+- name: install neutron openvswitch agent
+  apt: name=neutron-plugin-openvswitch-agent state=present force=yes
+  when: "'opendaylight' not in {{ NEUTRON_MECHANISM_DRIVERS }}"
 
 - name: config neutron
   template: src=neutron-network.conf dest=/etc/neutron/neutron.conf backup=yes
@@ -32,5 +36,8 @@
   notify:
     - restart neutron-plugin-openvswitch-agent
     - restart nova-compute
+
+- include: ../../neutron-network/tasks/odl.yml
+  when: "'opendaylight' in {{ NEUTRON_MECHANISM_DRIVERS }}"
 
 - meta: flush_handlers
