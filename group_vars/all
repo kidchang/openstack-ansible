@@ -45,7 +45,8 @@ build_in_image_name: cirros-0.3.3-x86_64-disk.img
 
 physical_device: /dev/sdb
 
-internal_interface: ansible_eth1
+internal_nic: eth1
+internal_interface: "ansible_{{ internal_nic }}"
 internal_ip: "{{ hostvars[inventory_hostname][internal_interface]['ipv4']['address'] }}"
 
 odl_username: admin
