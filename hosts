@@ -1,0 +1,8 @@
+[allinone]
+allinone ansible_ssh_host=10.1.0.11 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=root
+
+[multinode]
+controller ansible_ssh_host=10.1.0.11 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=root
+network ansible_ssh_host=10.1.0.12 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=root
+compute ansible_ssh_host=10.1.0.13 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=root
+storage ansible_ssh_host=10.1.0.14 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=root
