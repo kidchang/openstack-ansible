@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: controller
   remote_user: vagrant
   sudo: True
   roles:
